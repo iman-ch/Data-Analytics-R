@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Group # 7">
+<meta name="dcterms.date" content="2023-11-13">
+
+<title>Project 3 – Part 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Project3-Part2_Climate_Change_Human_Response_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Project3-Part2_Climate_Change_Human_Response_files/libs/quarto-html/quarto.js"></script>
+<script src="Project3-Part2_Climate_Change_Human_Response_files/libs/quarto-html/popper.min.js"></script>
+<script src="Project3-Part2_Climate_Change_Human_Response_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Project3-Part2_Climate_Change_Human_Response_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Project3-Part2_Climate_Change_Human_Response_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Project3-Part2_Climate_Change_Human_Response_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Project3-Part2_Climate_Change_Human_Response_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Project3-Part2_Climate_Change_Human_Response_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Project3-Part2_Climate_Change_Human_Response_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#project-3-part-2-report" id="toc-project-3-part-2-report" class="nav-link active" data-scroll-target="#project-3-part-2-report"><span class="header-section-number">1</span> Project 3 Part 2: Report</a>
+  <ul class="collapse">
+  <li><a href="#climate-change-and-human-response-a-data-driven-exploration" id="toc-climate-change-and-human-response-a-data-driven-exploration" class="nav-link" data-scroll-target="#climate-change-and-human-response-a-data-driven-exploration"><span class="header-section-number">1.1</span> Climate Change and Human Response: A Data Driven Exploration</a>
+  <ul class="collapse">
+  <li><a href="#table-of-contents" id="toc-table-of-contents" class="nav-link" data-scroll-target="#table-of-contents"><span class="header-section-number">1.1.1</span> Table of Contents</a></li>
+  </ul></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">1.2</span> Introduction</a></li>
+  <li><a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description"><span class="header-section-number">1.3</span> Data Description</a></li>
+  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics"><span class="header-section-number">1.4</span> Descriptive Statistics</a>
+  <ul class="collapse">
+  <li><a href="#numerical-analysis-public-opinion-on-climate-change-impact" id="toc-numerical-analysis-public-opinion-on-climate-change-impact" class="nav-link" data-scroll-target="#numerical-analysis-public-opinion-on-climate-change-impact"><span class="header-section-number">1.4.1</span> Numerical Analysis: Public Opinion on Climate Change Impact</a></li>
+  <li><a href="#numerical-analysis-the-happiness-of-each-country" id="toc-numerical-analysis-the-happiness-of-each-country" class="nav-link" data-scroll-target="#numerical-analysis-the-happiness-of-each-country"><span class="header-section-number">1.4.2</span> Numerical Analysis: the Happiness of Each Country</a></li>
+  <li><a href="#scatter-plot-analysis-perceived-harm-vs-positive-affect" id="toc-scatter-plot-analysis-perceived-harm-vs-positive-affect" class="nav-link" data-scroll-target="#scatter-plot-analysis-perceived-harm-vs-positive-affect"><span class="header-section-number">1.4.3</span> Scatter Plot Analysis: Perceived Harm vs Positive Affect</a></li>
+  <li><a href="#scatter-plot-analysis-harm-vs-awareness" id="toc-scatter-plot-analysis-harm-vs-awareness" class="nav-link" data-scroll-target="#scatter-plot-analysis-harm-vs-awareness"><span class="header-section-number">1.4.4</span> Scatter Plot Analysis: Harm vs Awareness</a></li>
+  <li><a href="#line-of-best-fit-analysis-freedom-to-make-life-choices-vs-positive-affect" id="toc-line-of-best-fit-analysis-freedom-to-make-life-choices-vs-positive-affect" class="nav-link" data-scroll-target="#line-of-best-fit-analysis-freedom-to-make-life-choices-vs-positive-affect"><span class="header-section-number">1.4.5</span> Line of Best Fit Analysis: Freedom to Make Life Choices vs Positive Affect</a></li>
+  <li><a href="#line-graph-analysis-number-of-storms-per-year-vs-negative-affect" id="toc-line-graph-analysis-number-of-storms-per-year-vs-negative-affect" class="nav-link" data-scroll-target="#line-graph-analysis-number-of-storms-per-year-vs-negative-affect"><span class="header-section-number">1.4.6</span> Line Graph Analysis: Number of Storms per Year vs Negative Affect</a></li>
+  </ul></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion"><span class="header-section-number">1.5</span> Discussion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">1.6</span> Conclusion</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Project3-Part2_Climate_Change_Human_Response.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Project 3 – Part 2</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Group # 7 </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 13, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="project-3-part-2-report" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Project 3 Part 2: Report</h1>
+<section id="climate-change-and-human-response-a-data-driven-exploration" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="climate-change-and-human-response-a-data-driven-exploration"><span class="header-section-number">1.1</span> Climate Change and Human Response: A Data Driven Exploration</h2>
+<section id="table-of-contents" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="table-of-contents"><span class="header-section-number">1.1.1</span> Table of Contents</h3>
+<ol type="1">
+<li><p><a href="#introduction">Introduction</a></p></li>
+<li><p><a href="#data-description">Data Description</a></p></li>
+<li><p><a href="#descriptive-statistics">Descriptive Statistics</a></p>
+<p>3.1 <a href="#numerical-analysis-public-opinion-on-climate-change-impact">Numerical Analysis: Public Opinion on Climate Change Impact</a></p>
+<p>3.2 <a href="#numerical-analysis-the-happiness-of-each-country">Numerical Analysis: the Happiness of Each Country</a></p>
+<p>3.2 <a href="#scatter-plot-analysis-perceived-harm-vs-positive-affect">Scatter Plot Analysis: Perceived Harm vs Positive Affect</a> &nbsp;</p>
+<p>3.3 <a href="#scatter-plot-analysis-harm-vs-awareness">Scatter Plot Analysis: Harm vs Awareness</a> &nbsp;</p>
+<p>3.4 <a href="#line-of-best-fit-analysis-freedom-to-make-life-choices-vs-positive-affect">Line of Best Fit Analysis: Freedom to Make Life Choices vs Positive Affect</a> &nbsp;</p>
+<p>3.5 <a href="#line-graph-analysis-number-of-storms-per-year-vs-negative-affect">Line Graph Analysis: Number of Storms per Year vs Negative Affect</a></p></li>
+<li><p><a href="#discussion">Discussion</a></p></li>
+<li><p><a href="#conclusion">Conclusion</a></p></li>
+</ol>
+</section>
+</section>
+<section id="introduction" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1.2</span> Introduction</h2>
+<p>With global warming on the rise and climate change threatening to have serious consequences on the future, it is understandable to have some negative feelings surrounding the topic.</p>
+<p>The problems we want to solve in relation to data is how the challenge of motivating the collective and individuals can mitigate climate change. To discuss this issue, we have selected three data-sets to discuss and analyze: ‘<u>Opinions on climate data from Meta</u>’, ‘<u>World Happiness Report Score</u>’, and ‘<u>Storm data for both Atlantic and Pacific basins</u>’.</p>
+<p>This investigation is centered around interaction between opinions towards climate change, the well-being/happiness of populations, and manifestation of storms. Through data analysis, we will explore the intricacy of the three data-sets. We will use data analysis techniques studied in this course to present the data and problem solutions, as well as an article on ‘Climate emotions and anxiety among young people in Canada’ to further support our case.</p>
+</section>
+<section id="data-description" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="data-description"><span class="header-section-number">1.3</span> Data Description</h2>
+<p>The data-sets we used contain many variables, which can individually offer insight and together in graphs and tables to interpret the sets and the problem stated. We used the following variables:</p>
+<ol type="1">
+<li><p>‘<strong>Country Name</strong>’ (char): from ‘<em>World Happiness Report Score</em>’ dataset, is the primary key to identify and filter data.</p></li>
+<li><p>‘<strong>harm_personally_great_deal</strong>’ (double): from ‘<em>Opinions on climate data from Meta</em>’ data-set, measures the level of personal concern individuals have related to the caused by climate change.</p></li>
+<li><p>‘<strong>harm_moderate_amount</strong>’ (double): from ‘<em>Opinions on climate data from Meta</em>’ data-set, measures the level of moderate concern individuals have related to the caused by climate change.</p></li>
+<li><p>‘<strong>harm</strong>’ (double): from ‘<em>Opinions on climate data from Meta</em>’ data-set, measures the level of average concern individuals have related to the caused by climate change.</p></li>
+<li><p>‘<strong>Positive Affect</strong>’ (double): from ‘<em>World Happiness Report Score</em>’ data-set, measures the average of previous-day affect measures for laughter, enjoyment, and doing or learning something interesting. <a href="https://worldhappiness.report/ed/2022/happiness-benevolence-and-trust-during-covid-19-and-beyond/">(Helliwell, Huang, et. Al, 2022)</a></p></li>
+<li><p>‘<strong>Negative Affect</strong>’ (double): from ‘<em>World Happiness Report Score</em>’ data-set, measures the average of previous-day affect measures for worry, sadness, and anger. <a href="https://worldhappiness.report/ed/2022/happiness-benevolence-and-trust-during-covid-19-and-beyond/">(Helliwell, Huang, et. Al, 2022)</a></p></li>
+<li><p>‘<strong>Count</strong>’ (integer): found through ‘<em>Storm data for both Atlantic and Pacific basins</em>’ data-set, where the cyclones data was grouped by ‘<em>NameYear</em>’ (integer) and ‘<em>Basin</em>’ (char), and then the function n() was used to find the number of storms per year.</p></li>
+</ol>
+</section>
+<section id="descriptive-statistics" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="descriptive-statistics"><span class="header-section-number">1.4</span> Descriptive Statistics</h2>
+<section id="numerical-analysis-public-opinion-on-climate-change-impact" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="numerical-analysis-public-opinion-on-climate-change-impact"><span class="header-section-number">1.4.1</span> Numerical Analysis: Public Opinion on Climate Change Impact</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>climate_harm_personally <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"climate_change.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">7</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>climate_harm_personally_great_deal <span class="ot">&lt;-</span>climate_harm_personally<span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">'harm_personally'</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">A =</span> Albania)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>climate_harm_personally_great_deal2 <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(climate_harm_personally_great_deal, <span class="at">cols =</span> <span class="sc">-</span>A, <span class="at">names_to =</span> <span class="st">"Country name"</span>, <span class="at">values_to =</span> <span class="st">"Harm_personally_great_deal"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span> A)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>climate_harm_moderate_amount <span class="ot">&lt;-</span>climate_harm_personally<span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">2</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">'harm_personally'</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">A =</span> Albania)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>climate_harm_moderate_amount2 <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(climate_harm_moderate_amount, <span class="at">cols =</span> <span class="sc">-</span>A, <span class="at">names_to =</span> <span class="st">"Country name"</span>, <span class="at">values_to =</span> <span class="st">"Harm_moderate_amount"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span> A)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>climate_harm <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(climate_harm_personally_great_deal2,climate_harm_moderate_amount2, <span class="st">"Country name"</span> )</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>climate_harm2 <span class="ot">&lt;-</span> climate_harm<span class="sc">|&gt;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Harm =</span> <span class="st">`</span><span class="at">Harm_personally_great_deal</span><span class="st">`</span> <span class="sc">+</span><span class="st">`</span><span class="at">Harm_moderate_amount</span><span class="st">`</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>climate_harm2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 110 × 4
+   `Country name`          Harm_personally_great_deal Harm_moderate_amount  Harm
+   &lt;chr&gt;                                        &lt;dbl&gt;                &lt;dbl&gt; &lt;dbl&gt;
+ 1 Albania                                       23.9                 28.6  52.5
+ 2 Algeria                                       27.3                 24.2  51.5
+ 3 Angola                                        50.2                 20.8  71.0
+ 4 Argentina                                     39.1                 28.4  67.5
+ 5 Armenia                                       15.5                 28.1  43.7
+ 6 Asian &amp; Pacific Islands                       44.9                 22.5  67.4
+ 7 Australia                                     21.2                 33.4  54.6
+ 8 Austria                                       24.7                 37.9  62.5
+ 9 Azerbaijan                                    16.8                 34.8  51.6
+10 Bangladesh                                    45.8                 22.0  67.8
+# ℹ 100 more rows</code></pre>
+</div>
+</div>
+<p>This table is used show what each countries opinions on how climate change harms a countries populations via an opinion survey. The ‘Country name’ column is categorical and provides the geographic region, while the ‘harm_personally_great_deal’, ‘Harm_moderate_amount’, and ‘harm’ columns are quantitative, representing the severity of the harm (a great deal, moderate amount) and the overall perceived harm of the two added together. The quantitative values are percentages of the surveyed population, and overall the values represent a subset of the ‘<em>Opinions on climate data from Meta</em>’ data-set.</p>
+</section>
+<section id="numerical-analysis-the-happiness-of-each-country" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="numerical-analysis-the-happiness-of-each-country"><span class="header-section-number">1.4.2</span> Numerical Analysis: the Happiness of Each Country</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>world_happiness_address <span class="ot">&lt;-</span> <span class="fu">read_xls</span>(<span class="st">"world_happiness_data.xls"</span>, <span class="at">sheet =</span> <span class="dv">1</span>) </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>world_happiness_postive_affect <span class="ot">&lt;-</span> world_happiness_address <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2022</span>)<span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">'Country name'</span>, <span class="st">'Positive affect'</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>world_happiness_postive_affect</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 114 × 2
+   `Country name` `Positive affect`
+   &lt;chr&gt;                      &lt;dbl&gt;
+ 1 Afghanistan                0.206
+ 2 Albania                    0.547
+ 3 Argentina                  0.724
+ 4 Armenia                    0.531
+ 5 Australia                  0.711
+ 6 Austria                    0.718
+ 7 Bangladesh                 0.394
+ 8 Belgium                    0.718
+ 9 Benin                      0.571
+10 Bolivia                    0.738
+# ℹ 104 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="scatter-plot-analysis-perceived-harm-vs-positive-affect" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="scatter-plot-analysis-perceived-harm-vs-positive-affect"><span class="header-section-number">1.4.3</span> Scatter Plot Analysis: Perceived Harm vs Positive Affect</h3>
+<section id="figure-1" class="level4" data-number="1.4.3.1">
+<h4 data-number="1.4.3.1" class="anchored" data-anchor-id="figure-1"><span class="header-section-number">1.4.3.1</span> (Figure 1)</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>world_happiness_address2 <span class="ot">&lt;-</span> world_happiness_address <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2022</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Positive affect</span><span class="st">`</span>, <span class="st">`</span><span class="at">Country name</span><span class="st">`</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>world_happiness_climate_harm <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(climate_harm2, world_happiness_address2, <span class="st">"Country name"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>world_happiness_climate_harm_lab <span class="ot">&lt;-</span> <span class="fu">labs</span>(</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Perceived Harm vs Positive Affect"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Data from Meta and World Happiness Report Score(2023)"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="st">"Perceived Harm(Moderate Amount + Great Deal)"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">"Positive Affect"</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(world_happiness_climate_harm, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Positive affect</span><span class="st">`</span>, <span class="at">y =</span> Harm)) <span class="sc">+</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'loess'</span>, <span class="at">formula =</span> <span class="st">'y ~ x'</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  world_happiness_climate_harm_lab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Project3-Part2_Climate_Change_Human_Response_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>This scatter plot visually represent the relationship between ‘<em>Perceived</em> <em>Harm</em>’ (combining both ‘<em>great deal</em>’ and ‘<em>moderate amount</em>’ harm categories. The curve describes a non-linear relationship where the points of harm positive affect varies. This suggests that external factors may be at play, influencing the relationship.</p>
+</section>
+</section>
+<section id="scatter-plot-analysis-harm-vs-awareness" class="level3" data-number="1.4.4">
+<h3 data-number="1.4.4" class="anchored" data-anchor-id="scatter-plot-analysis-harm-vs-awareness"><span class="header-section-number">1.4.4</span> Scatter Plot Analysis: Harm vs Awareness</h3>
+<section id="figure-2" class="level4" data-number="1.4.4.1">
+<h4 data-number="1.4.4.1" class="anchored" data-anchor-id="figure-2"><span class="header-section-number">1.4.4.1</span> (Figure 2)</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>climate_awareness <span class="ot">&lt;-</span>  <span class="fu">read_xlsx</span>(<span class="st">"climate_change.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">3</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>climate_awareness_alot <span class="ot">&lt;-</span> climate_awareness <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">4</span>)<span class="sc">|&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">'climate_awareness'</span>)<span class="sc">|&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">A =</span> Albania)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>climate_awareness_alot2 <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(climate_awareness_alot, <span class="at">cols =</span> <span class="sc">-</span>A, <span class="at">names_to =</span> <span class="st">"Country name"</span>, <span class="at">values_to =</span> <span class="st">"A lot of Awareness"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span> A)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>climate_awareness_moderate <span class="ot">&lt;-</span> climate_awareness <span class="sc">|&gt;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">3</span>)<span class="sc">|&gt;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">'climate_awareness'</span>)<span class="sc">|&gt;</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">A =</span> Albania)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>climate_awareness_moderate2 <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(climate_awareness_moderate, <span class="at">cols =</span> <span class="sc">-</span>A, <span class="at">names_to =</span> <span class="st">"Country name"</span>, <span class="at">values_to =</span> <span class="st">"Moderate Awareness"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span> A)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>climate_awarness2 <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(climate_awareness_moderate2,climate_awareness_alot2, <span class="st">"Country name"</span> )</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>climate_awarness3 <span class="ot">&lt;-</span> climate_awarness2 <span class="sc">|&gt;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Awareness =</span>  <span class="st">`</span><span class="at">A lot of Awareness</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Moderate Awareness</span><span class="st">`</span> )</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>world_awareness_harm <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(climate_awarness3,climate_harm2, <span class="st">"Country name"</span> )</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>world_awareness_harm_lab <span class="ot">&lt;-</span> <span class="fu">labs</span>(</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>   <span class="at">title =</span> <span class="st">"Harm vs Awareness"</span>,</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Data from Meta"</span>,</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="st">"Harm (alot &amp; Moderate)"</span>,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">"Awareness (alot &amp; Moderate) "</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(world_awareness_harm, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Awareness</span><span class="st">`</span>, <span class="at">y =</span> Harm)) <span class="sc">+</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'loess'</span>, <span class="at">formula =</span> <span class="st">'y ~ x'</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  world_awareness_harm_lab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Project3-Part2_Climate_Change_Human_Response_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>This plot shows the relationship between ‘<em>Awareness</em>’ and ‘<em>Harm</em>’. The data points suggest responses from each country, and the curve illustrates a non-linear relationship (as awareness increases, perceived harm increases until the peak, and decreases). The scatter plot suggests that external factors may be at play, influencing the relationship.</p>
+</section>
+</section>
+<section id="line-of-best-fit-analysis-freedom-to-make-life-choices-vs-positive-affect" class="level3" data-number="1.4.5">
+<h3 data-number="1.4.5" class="anchored" data-anchor-id="line-of-best-fit-analysis-freedom-to-make-life-choices-vs-positive-affect"><span class="header-section-number">1.4.5</span> Line of Best Fit Analysis: Freedom to Make Life Choices vs Positive Affect</h3>
+<section id="figure-3" class="level4" data-number="1.4.5.1">
+<h4 data-number="1.4.5.1" class="anchored" data-anchor-id="figure-3"><span class="header-section-number">1.4.5.1</span> (Figure 3)</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>world_happiness_relation_to_freedom <span class="ot">&lt;-</span> world_happiness_address <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2022</span>)<span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">'Country name'</span>, <span class="st">'Positive affect'</span>, <span class="st">'Freedom to make life choices'</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>cleaned_world_happiness <span class="ot">&lt;-</span> world_happiness_relation_to_freedom <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="st">`</span><span class="at">Freedom to make life choices</span><span class="st">`</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(<span class="st">`</span><span class="at">Positive affect</span><span class="st">`</span>))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>world_happiness_relation_to_freedom_lab <span class="ot">&lt;-</span> <span class="fu">labs</span>(</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Freedom to Make Life Choices vs Positive Affect"</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Data from World Happiness Report Score (2023)"</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="st">"Freedom to Make Life Choices"</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">"Positive Affect"</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cleaned_world_happiness, <span class="fu">aes</span>(<span class="at">y =</span> <span class="st">`</span><span class="at">Freedom to make life choices</span><span class="st">`</span>, <span class="at">x =</span> <span class="st">`</span><span class="at">Positive affect</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'loess'</span>, <span class="at">formula =</span> <span class="st">'y ~ x'</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  world_happiness_relation_to_freedom_lab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Project3-Part2_Climate_Change_Human_Response_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>This plot represents the relationship between ‘Positive affect’ and ‘Freedom to make life choices’. The points correspond to the countries’ average score. There is an upward trend represented through a line of best fit, which indicates a positive correlation (as there is more freedom in a country to make life choices, their positive affect increases).</p>
+</section>
+</section>
+<section id="line-graph-analysis-number-of-storms-per-year-vs-negative-affect" class="level3" data-number="1.4.6">
+<h3 data-number="1.4.6" class="anchored" data-anchor-id="line-graph-analysis-number-of-storms-per-year-vs-negative-affect"><span class="header-section-number">1.4.6</span> Line Graph Analysis: Number of Storms per Year vs Negative Affect</h3>
+<section id="figure-4" class="level4" data-number="1.4.6.1">
+<h4 data-number="1.4.6.1" class="anchored" data-anchor-id="figure-4"><span class="header-section-number">1.4.6.1</span> (Figure 4)</h4>
+<div class="cell">
+<div class="cell-output cell-output-error">
+<pre><code>Error: IOError: Failed to open local file 'C:/Users/imanc/Documents/GitHub/Data-Analytics-R/Project 3/Cyclone-1850-2023.parquet'. Detail: [Windows error 2] The system cannot find the file specified.</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): object 'cyclones' not found</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): object 'cyclones2' not found</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): object 'Canada' not found</code></pre>
+</div>
+</div>
+<p>The plot represents the relationship between ‘Negative affect’ (sadness) over a period (2019-2022) and storms per year. The trend-line moves up, suggesting that, as frequency of storms increase, negative affect on population increases.</p>
+</section>
+</section>
+</section>
+<section id="discussion" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="discussion"><span class="header-section-number">1.5</span> Discussion</h2>
+<p>Our exploratory data analysis sought to unravel the complex interplay between human emotions, perceptions, and actions in the context of climate change, a challenge that extends beyond environmental ramifications to deeply affect socio-psychological aspects of human life. Our analysis parallels the insights from the article “<a href="https://www.sciencedirect.com/science/article/pii/S2667278223000032">Climate emotions and anxiety among young people in Canada: A national survey and call to action</a>,” which sheds light <u>on the emotional and psychological impacts of climate change on younger demographics.</u> The parallels and contrasts between our data-driven findings and the article’s survey results offer a multifaceted view of how climate change is perceived and felt at the individual and societal levels.</p>
+<p><strong>Perceived Harm vs Positive Affect:</strong></p>
+<p>The intersection of perceived harm due to climate change with the overall positive effect of individuals presents a paradox. While one might expect that higher perceived harm would correlate with lower positive affect, our analysis suggests that the relationship is more nuanced. The scatter plot in Chunk 13 (Figure 1) aligns with the article’s findings, where <u>young Canadians show a range of emotional responses from anxiety to optimism despite understanding the risks of climate change</u>. This suggests a broader trend of adaptability and resilience among youth facing global environmental challenges.</p>
+<p><strong>Harm vs Awareness:</strong></p>
+<p>The non-linear relationship we observed between awareness of climate issues and perceived harm, depicted in Chunk 14 (Figure 2) reflects the article’s insights on the complexity of translating awareness into concern. It points to potential factors like psychological distancing or ‘awareness fatigue’, where <u>heightened awareness does not equate to a proportional increase in concern</u>, paralleling the article’s observations among young Canadians.</p>
+<p><strong>Freedom to Make Life Choices vs Positive Affect:</strong></p>
+<p>The data from the World Happiness Report Score (2023) revealed <u>a compelling positive correlation between the freedom to make life choices and positive affect among populations</u>, as seen in the visualization from Chunk 15 (Figure 3) resonates with the article’s emphasis on empowering young people in climate decision-making. It is imperative to consider that individuals in societies with greater autonomy may be better equipped to adapt to and mitigate the effects of climate change due to a heightened sense of agency and control over their lives.</p>
+<p><strong>Number of Storms per Year vs Negative Affect (Sadness):</strong></p>
+<p><u>The upward trend in negative affect, correlated with the frequency of storms, underscores the direct emotional impact of climate events on human well-being</u>. This relationship, highlighted in Chunk 16 (Figure 4), is further echoed in the article’s discussion on the mental health toll of such events on youth. It’s particularly significant as it demonstrates the immediate and tangible effects of climate change on individual lives. The increasing frequency of storms, potentially indicative of a warming climate, has a measurable impact on the psychological state of populations. This observation emphasizes the urgent need for integrating climate resilience and mental health support into policy planning.”</p>
+</section>
+<section id="conclusion" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">1.6</span> Conclusion</h2>
+<p>In synthesizing the findings of our multifaceted investigation into the socio-psychological dynamics of climate change, we arrive at a nuanced understanding of its impact on human sentiments and actions. The paradoxical coexistence of perceived harm and an enduring sense of optimism, as depicted in our “Perceived Harm vs Positive Affect” study <a href="#figure-1">(Figure 1)</a>, illuminates the complex emotional landscape shaped by climate change. This duality, suggests that while people are increasingly aware of the risks posed by climate change, this awareness does not necessarily deepen their perception of harm, as seen in the “Harm vs Awareness” analysis <a href="#figure-2">(Figure 2)</a>.</p>
+<p>The positive correlation between autonomy in life decisions and overall well-being, revealed in the “Freedom to Make Life Choices vs Positive Affect” data <a href="#figure-3">(Figure 3)</a>, further underscores the power of empowerment in bolstering resilience to climate adversities. Speaking to the potential of fostering individual agency as a catalyst for adaptive and mitigate actions against climate change.</p>
+<p>Our exploration culminates in a striking revelation from the “Number of Storms per Year vs Negative Affect (Sadness)” <a href="#figure-4">(Figure 4)</a>, which highlights the immediate and visceral impact of climate phenomena on human emotions. Emphasizing the need for holistic strategies that address the mental health fallout of climate events alongside environmental interventions.</p>
+<p>This study reinforces the idea that awareness, while foundational, is only the first step in a larger journey towards meaningful climate action. It is the interplay of awareness, understanding, and engagement that holds the potential to galvanize a powerful collective response against climate change. As we look to the future, our findings advocate for a strategy that marries environmental awareness with proactive engagement and emotional resilience. In doing so, we can cultivate a society more equipped to face the challenges of climate change, transforming awareness into action and concern into empowerment.</p>
+<p>Powerful collective, which in turn can create a great change in the fight against climate change.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

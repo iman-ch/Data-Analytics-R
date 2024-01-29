@@ -1,0 +1,144 @@
+---
+title: "Quiz-03"
+author: "Shengda Hu"
+author2: "Iman Chaudhry"
+date: "03/10/2023"
+output: 
+  pdf_document: default
+  html_document: default
+  html_notebook: default
+  slidy_presentation: default
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(carData)
+```
+
+**Before starting**
+
+You may need to install the package `carData`, since this Quiz uses the dataset `Soils` in the package `carData`.
+
+### Basic information
+
+[3pts] Find some basic information concerning the `Soils` data.
+
+- Number of rows (`num_rows`)
+- Number of variables (`num_cols`)
+- List of categorical variables (`cat_vars`)
+
+```{r error=TRUE}
+(num_rows <-
+  nrow(Soils) 
+)
+(num_cols <-
+    ncol(Soils) 
+)
+(cat_vars <- 
+    c("Group", "Contour", "Depth", "Gp", "Block") 
+)
+```
+
+Use the Console to find out more information about the dataframe and answer the following question:
+
+- **What does the variable `Dens` represent?**
+
+*Answer*:
+bulk density in gm/cm$^3$
+
+### Work with the data
+
+**I)** [8pts] Complete the code in the code blocks below to create a plot showing the covariation between the variables `Depth` and `Contour`. For each group of observations that has the same `Depth` and `Contour`, represent on the same plot the information concerning
+ 
++ the average pH values (create a variable `avg_pH`) and 
++ the average Calcium values (create a variable `avg_Ca`).
+
+**Note** In the first code block, create the dataframe `computed` that contains the necessary information. In the second code block, using the resulting `computed` dataframe to complete the plot.
+
+```{r error=TRUE}
+(computed <- Soils
+  |> summarize(
+    .by = c(Depth, Contour),
+    avg_pH = mean(pH),
+    avg_Ca = mean(Ca)
+  )
+)
+```
+
+```{r error=TRUE}
+(computed_plot <- computed
+  |> ggplot(mapping = aes(x = Depth, y = Contour)) +
+    geom_point(mapping = aes(color = avg_pH, size=avg_Ca))
+)
+```
+
+**II)** 
+
+**i)** [2pts] Complete the code in the code block below to create a plot showing the covariation between the two variables `Depth` and `Ca`.
+
+```{r error=TRUE}
+(cov_plot <- Soils
+ |> ggplot(mapping = aes(x=Depth, y=Ca)) +
+    geom_boxplot()
+)
+```
+
+**ii)** [2pts] Based on the plot above, provide the name(s) of the `Depth`(s) containing no outlier in the `Ca` variable. You may want to choose appropriate method of plotting in the previous part so that it facilitates answering this question.
+
+```{r error=TRUE}
+no_outlier <- "60-90"
+```
+
+**III)** [4pts] Complete the code in the code block below to obtain the following plots of `Conduc` (on `y`-axis) against `K` (on `x`-axis):
+
+- **1.** a scatter plot
+- **2.** the line of best fit representing the linear regression model (use `lm`)
+
+```{r error=TRUE}
+(fit_plot <- Soils
+ |> ggplot(mapping = aes(x=K, y=Conduc)) +
+    geom_point() +
+    geom_smooth(method=lm, se = FALSE)
+)
+```
+
+### Descriptive statistics
+
+**IV)** 
+
+**i)** [4pts] Compute the covariance and correlation coefficients of the pairs of variables:
+
+ - `K` and `Mg`
+ - `Na` and `Conduc`
+
+```{r error=TRUE}
+cov_KMg <- cov(Soils$K, Soils$Mg)
+cov_NaConduc <- cov(Soils$Na, Soils$Conduc) 
+cor_KMg <- cor(Soils$K, Soils$Mg) 
+cor_NaConduc <- cor(Soils$Na, Soils$Conduc) 
+```
+
+**ii)** [2pts] Based on the output of the code block above, describe the relationship between the pairs of variables in the dataframe `Soils`. Write your answers, with justifications, in the space provided below.
+
+*Answer*: 
+There is a relatively strong positive linear relationship between `Na` and `Conduc`, since the correlation coefficients between them is very close to `1`. There is a weak negative linear relationship between `K` and `Mg`, since the correlation coefficients between them is negative and is closer to `0` than `-1`.
+
+**V)** [2pts] Complete the following code block to compute the correlation coefficient of the variables `Na` and `Conduc`, WITHOUT using the `R` function `cor`. Compare your answer with the output from the code block in Problem **IV)**.
+
+```{r error=TRUE}
+cor_Conduc_Na <- cov(Soils$Na, Soils$Conduc)/sqrt(var(Soils$Na)*var(Soils$Conduc)) # SOLUTION
+```
+
+**VI)** [2pts] Based on the output of the code block below, describe the relation between `Conduc` and `K` according to the linear regression model. Write down the formula expressing the relation in the space provided below.
+
+```{r}
+# nothing to change here
+lm(Conduc ~ K, Soils) |>
+  coef()
+```
+
+*Answer*: 
+`Conduc = -13.40937 * K + 12.84066 + error`

@@ -1,0 +1,120 @@
+---
+title: "Quiz-01"
+author: "Shengda Hu"
+author2: "Iman Chaudhry"
+date: "20/09/2023"
+output: 
+  pdf_document: default
+  html_document: default
+  html_notebook: default
+  slidy_presentation: default
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+This Quiz uses the dataset `txhousing`.
+
+### Basic information
+
+In the code block below, use one of the methods we learned to view the data in the dataframe `txhousing`.
+
+```{r error=TRUE}
+txhousing
+glimpse(txhousing)
+```
+
+Then answer the questions by complete the code blocks below:
+
+- [1pt] **Number of rows:**
+```{r error=TRUE}
+row_number <- 8602
+```
+
+- [1pt] **Number of variables:**
+
+```{r error=TRUE}
+variable_number <- 9
+```
+
+- [1pt] **What is the type of the variable `date`?**
+
+```{r error=TRUE}
+variable_type <- "double"
+```
+
+Use the Console to find out more information about the dataframe, and answer the following question:
+
+- [1pt] **What do the variable `inventory` represent?**
+
+*Answer*: 
+
+Number of months it would take to sell all current listings at current pace of sales.
+
+### Making plots
+
+**I)** [2pts] Complete the code in the code block below to make a scatter plot of `sales` (on `y`-axis) against `listings` (on `x`-axis), so that the colors of the points represent `median`.
+
+```{r error=TRUE}
+ggplot(data = txhousing) +
+  geom_point(mapping=aes(x=listings, y=sales, color=median), alpha=.3)
+```
+
+**II)** [2pts] Complete the code in the code block below using `date > 2010` to filter the data for a `geom_smooth` plot of `sales` (on `y`-axis) against `listings` (on `x`-axis), so that only the rows with `date` after `2010-01-01` are included.
+
+```{r error=TRUE}
+ggplot(data = filter(txhousing, date > 2010)) +
+  geom_smooth(mapping=aes(x=listings, y=sales))
+```
+
+**III)** [2pts] Complete the code in the code block below so that the plots obtained in **I)** and **II)** above appear in the same plot.
+
+**Note**: This is an exercise. In general, it's not recommended to plot different sets of data on the same graph.
+```{r error=TRUE}
+ggplot(data = txhousing, mapping=aes(x=listings, y=sales)) +
+  geom_point(mapping=aes(color=median), alpha=.3) +
+  geom_smooth(data = filter(txhousing, date > 2010))
+```
+
+**IV)** [1pts] Complete the code block below to make a box plot of `median` (on `y`-axis).
+
+```{r error=TRUE}
+ggplot(data = txhousing) +
+  geom_boxplot(mapping = aes(y = median)) +
+  coord_flip()
+```
+
+### Descriptive statistics
+
+**IV)**  The values of the variable `listings` can be accessed using `txhousing$listings`.
+
+- [2pt] Complete the code block below to find the six descriptive statistics of the variable `listings` (*Hint*: Use `txhousing$listings` to get the values of the `listings` variable as a vector). The six descriptive statistics are
+    `Min`, `Q1`, `Median`, `Mean`, `Q3` and `Max`
+
+```{r error=TRUE}
+(six_stats <- 
+   summary(txhousing$listings)
+)
+```
+
+Write the answers in the space below. In the order of `Min`, `Q1`, `Median`, `Mean`, `Q3` and `Max`, the values are:
+
+*Answer*:
+0     
+682    
+1283    
+3217    
+2954   
+43107    
+1424 
+
+- [2pt] Without using more `R` functions, find the `IQR` for the variable `listings`. Are there any outliers for the `listings` variable?
+
+*Answer*: 
+
+`IQR = 2954 - 682 = 2272`. 
+Yes, since `Q3 + 1.5 * IQR = 2954 + 1.5 * 2272 = 5226 + 1136 = 6362 < Max = 43107`, there should be outliers above.

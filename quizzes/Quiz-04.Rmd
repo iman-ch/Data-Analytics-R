@@ -1,0 +1,208 @@
+---
+title: "Quiz-04"
+author: "Shengda Hu"
+author2: "Iman Chaudhry"
+date: "17/10/2023"
+output: 
+  pdf_document: default
+  html_document: default
+  html_notebook: default
+  slidy_presentation: default
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(carData)
+```
+
+**Before starting**
+
+this Quiz uses the dataset `Soils` in the package `carData`. **IF** you have not installed the package `carData`, you may need to install the package `carData`. Otherwise, if you have already installed `carData` for the previous quiz, no further
+installation is necessary.
+
+### [2pts] Create dataframe
+
+Use `tibble()` or `tribble()` to create the following dataframe (call it `NAmerCountries`), containing the top `3` most populous countries in North America:
+
+    iso_code    location
+    <chr>       <chr>
+    
+    USA       United States
+    MEX       Mexico
+    CAN       Canada
+
+```{r}
+  NAmerCountries <-
+    tibble(
+      iso_code = c("USA", 'MEX', "CAN"),
+      location = c("United States", "Mexico", "Canada")
+    )
+# or
+  NAmerCountries <-
+    tribble(
+      ~iso_code, ~location,
+      #--------/----------
+      "USA", "United States",
+      "MEX", "Mexico",
+      "CAN", "Canada"
+    )
+```
+
+### Make dataframe tidy
+
+**1)** The following two dataframes contain the same information, concerning the total COVID-19 cases and new deaths on the specific dates in a given country.
+
+The first one is the `non_tidy` dataframe below
+
+    date        USA           MEX         CAN         GTM
+    <date>	    <chr>         <chr>	      <chr>	      <chr>
+    
+    2022-10-11	96783014_583	7098525_25	4306156_13	1130102_4
+    2022-10-12	96847331_748	7099723_17	4309992_62	1130829_4
+    2022-10-13	96911257_653	7100886_4	  4319103_109	1131666_2
+
+The second one is the `tidied` dataframe below
+
+    iso_code	date	        total_cases      new_deaths
+    <chr>	    <date>        <int>           <int>
+    
+    USA       2022-10-11    96783014        583
+    USA       2022-10-12    96847331        748
+    USA       2022-10-13    96911257        653
+    MEX       2022-10-11    7098525         25
+    MEX       2022-10-12    7099723         17
+    MEX       2022-10-13    7100886         4
+    CAN       2022-10-11    4306156         13
+    CAN       2022-10-12    4309992         62
+    CAN       2022-10-13    4319103         109
+    GTM       2022-10-11    1130102         4
+    GTM       2022-10-12    1130829         4
+    GTM       2022-10-13    1131666         2
+
+**i)** [2pts] Use the function `read_csv` to create the two dataframes in the following code block, such that `non_tidy` contains the first dataframe in the above, while `tidied` contains the second dataframe in the above.
+
+*Hint*: You may want to copy-paste the tables above and adapt the resulting strings to save yourself from typing everything all over.
+
+```{r}
+non_tidy <- read_csv(
+  "date,CAN,GTM,MEX,USA
+    2022-10-11,96783014_583,7098525_25,4306156_13,1130102_4
+    2022-10-12,96847331_748,7099723_17,4309992_62,1130829_4
+    2022-10-13,96911257_653,7100886_4,4319103_109,1131666_2"
+)
+
+tidied <- read_csv(
+  "iso_code,date,total_cases,new_deaths
+    USA,2022-10-11,96783014,583
+    USA,2022-10-12,96847331,748
+    USA,2022-10-13,96911257,653
+    MEX,2022-10-11,7098525,25
+    MEX,2022-10-12,7099723,17
+    MEX,2022-10-13,7100886,4
+    CAN,2022-10-11,4306156,13
+    CAN,2022-10-12,4309992,62
+    CAN,2022-10-13,4319103,109
+    GTM,2022-10-11,1130102,4
+    GTM,2022-10-12,1130829,4
+    GTM,2022-10-13,1131666,2"
+ )
+```
+
+
+**ii)** [3pts] In the code block below, write appropriate code to convert the `non_tidy` dataframe into the tidy form of `tidied`. Use the column name `cases_deaths` to store the values in the appropriate `pivot_` functions.
+
+```{r}
+tidied_by_hand <- non_tidy |>
+  pivot_longer(CAN:USA, names_to = "iso_code", values_to = "cases_deaths") |>
+  separate_wider_delim(
+    cases_deaths,
+    names = c("total_cases", "new_deaths"),
+    delim = "_") |>
+  relocate(iso_code)
+```
+
+**iii)** [2pts] In the code block below, write appropriate code to convert the `tidied` dataframe into the non-tidy form of the `non_tidy` dataframe. 
+
+*Hint*: See how the dataframe is being changed by the `unite` function before working on the solution.
+
+```{r}
+non_tidy_by_hand <- tidied |>
+  unite("cases_deaths", total_cases:new_deaths) |>
+  pivot_wider(names_from = iso_code, values_from = cases_deaths)
+```
+
+**2)** The dataframe below is not tidy. It contain the same information as the the dataframes in the previous question, together with an extra column of `population` data.
+
+    iso_code	total_cases	new_deaths	population
+    <chr>		  <int>		    <int>		    <int>
+
+    2022-10-11
+    CAN	      4306156	    13	        38155012
+    GTM	      1130102	    4	          17608483
+    MEX	      7098525	    25	        126705138
+    USA	      96783014	  583	        336997624
+    2022-10-12
+    CAN	      4309992	    62	        38155012
+    GTM	      1130829	    4	          17608483
+    MEX	      7099723	    17	        126705138
+    USA	      96847331	  748	        336997624
+    2022-10-13
+    CAN	      4319103	    109	        38155012
+    GTM	      1131666	    2	          17608483
+    MEX	      7100886	    4         	126705138
+    USA	      96911257	  653         336997624
+
+**i)** [2pts] Use `read_csv` to create a dataframe `untidy_by_date` that contains exactly the same dataframe as above (with possible `NA`'s).
+
+*Hint*: You may want to copy-paste the tables above and adapt the resulting strings to save yourself from typing everything all over.
+
+```{r}
+untidy_by_date <- read_csv(
+  "iso_code,total_cases,new_deaths,population
+    2022-10-11,,,
+    CAN,4306156,13,38155012
+    GTM,1130102,4,17608483
+    MEX,7098525,25,126705138
+    USA,96783014,583,336997624
+    2022-10-12,,,
+    CAN,4309992,62,38155012
+    GTM,1130829,4,17608483
+    MEX,7099723,17,126705138
+    USA,96847331,748,336997624
+    2022-10-13,,,
+    CAN,4319103,109,38155012
+    GTM,1131666,2,17608483
+    MEX,7100886,4,126705138
+    USA,96911257,653,336997624"
+)
+```
+
+**ii)** [6pts] Create a new tidy dataframe `tidied_by_date` from `untidy_by_date` above in the code block below so that it has a new column `date`, recording the dates for the data contained in each row. In the result, the columns should be ordered as
+`iso_code`, `date`, `total_cases`, `new_deaths`, and `population`.
+
+```{r}
+tidied_by_date <- untidy_by_date |>
+  mutate(date = ifelse(is.na(total_cases), iso_code, NA)) |>
+  relocate(iso_code, date) |>
+  fill(date) |>
+  filter(!is.na(total_cases))
+```
+
+### Read `csv` file directly
+
+**3)** [3pts] Use appropriate command to load the `csv` file containing COVID-19 data from the following web address:
+
+- "https://covid.ourworldindata.org/data/owid-covid-data.csv"
+
+Then change the types of the variables whose names end with `boosters`, `cases`, `deaths`, `tests` or `vaccinations` to `integer`. 
+
+*Hint*: Use `across` and `ends_with` within `mutate` -- do `?mutate` in the Console.
+
+```{r}
+covid <- 
+  read_csv("https://covid.ourworldindata.org/data/owid-covid-data.csv") |>
+  mutate(across(ends_with("boosters") | ends_with("cases") | ends_with("deaths") | ends_with("tests") | ends_with("vaccinations"), as.integer))
+```

@@ -1,0 +1,111 @@
+---
+title: "Quiz-02"
+author: "Shengda Hu"
+author2: "Iman Chaudhry"
+date: "26/09/2023"
+output: 
+  pdf_document: default
+  html_document: default
+  html_notebook: default
+  slidy_presentation: default
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(nycflights13)
+```
+
+**I)** [1pt] Count the total number of missing values in the `flights` dataframe.
+
+*Hint*: Use `sum` and the fact that boolean `TRUE` is secretly `1`.
+
+```{r}
+na_values <- sum(is.na(flights))
+```
+
+**II)**[2pts] Find the flights that arrived at their destinations at between `1:00` and `6:00` in the morning.
+
+```{r}
+early_flights <- flights |>
+  filter(between(arr_time, 100, 600))
+```
+
+**III)** 
+
+**i)** [2pts] In the `flights` dataframe, find the flights that are delayed at departure by at least an hour, but made up over 30 minutes in flight, and the destination is NOT `HNL`.
+```{r}
+fast_flights <- flights |>
+  filter(dep_delay > 60, dep_delay - arr_delay > 30, dest != "HNL")
+```
+
+**ii)** [3pts] In the resulting dataframe `fast_flights` in the previous part, find the `mean`, `standard deviation` and the `standard error` of the departure delay.
+
+```{r}
+mean_delay <- 
+  fast_flights$dep_delay |>
+  mean() 
+std_dev <-
+  fast_flights$dep_delay |>
+  sd()
+std_error <- std_dev / sqrt(length(fast_flights$dep_delay)) # SOLUTION
+```
+
+**IV)** [3pts] In the `flights` dataframe, rearrange the columns so that `dep_delay`, `arr_delay`, `distance`, `dest` become the first four columns; then order the resulting dataframe by the amount of time made up in flight, the most amount of time made up down to the least. Make sure to remove the rows that has `NA` values in either `dep_delay` or `arr_delay`.
+
+```{r}
+ordered_flights <- flights |>
+  filter(!is.na(dep_delay), !is.na(arr_delay)) |>
+  select(dep_delay, arr_delay, distance, dest, everything()) |>
+  arrange(desc(dep_delay - arr_delay))
+```
+
+**V)** [3pts] From the `flights` dataframe, the `dep_time` variable is in military time format, i.e. `1303` means `1:03pm`. Add a new column named `dep_minutes`, which records the departure time as number of minutes since midnight.
+
+*Hint*: Use the operators `%/%` and `%%` to find the quotient and remainders.
+
+```{r}
+minute_format <- flights |>
+  mutate(dep_minutes = (dep_time %/% 100) * 60 +  (dep_time %% 100))
+```
+
+**VI)** [3pts] Find all destinations that are flown by at least two carriers, create a dataframe with two columns `dest` and `n_carrier`, recording the destinations with multiple carriers (`dest`) and the number of carriers flown to the destination (`n_carrier`). It should be ordered in descending order with respect to `n_carrier`.
+
+*Hint*: You may look into the function `n_distinct()`.
+
+```{r}
+multiple_carriers <- flights |>
+  summarise(
+    .by = dest,
+    n_carrier = n_distinct(carrier),
+    ) |>
+  filter(n_carrier > 1) |>
+  arrange(desc(n_carrier))
+```
+
+**VII)** 
+
+**i)** [3pts] Find all destinations that are flown by at least two carriers, then for each such destination and carrier, find the mean value of the arrival delay. The result is a dataframe with columns `dest`, `carrier`, `mean_delay`, `count`, which records the destination (`dest`), the carrier (`carrier`), the mean value for the arrival delay for this carrier and the destination (`mean_delay`) and the number of flights involved (`count`).
+
+*Hint*: Remember `na.rm`.
+
+```{r}
+carrier_delays <- flights |>
+  group_by(dest) |>
+  filter(n_distinct(carrier) > 1) |>
+  ungroup() |>
+  summarise(
+    .by = c(dest, carrier),
+    count = n(),
+    mean_delay = mean(arr_delay, na.rm = TRUE),
+  )
+```
+
+**ii)** [1pt] There is a `NaN` value in the `mean_delay` column from the resulting `carrier_delays` dataframe from the previous part, what could be the reason?
+
+*Answer*:
+
+ all values of `arr_time` are missing for that destination and carrier.
+ 
